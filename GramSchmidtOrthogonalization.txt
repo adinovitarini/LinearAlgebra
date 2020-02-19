@@ -1,0 +1,33 @@
+clear all
+clc
+%Gram-Schmidt Orthogonalization 
+disp('QR Decompossition Program for nxn Matrix');
+disp('          by : Adi Novitarini          ');
+disp('=======================================');
+n=input('Ordo matrix : ');
+A=ceil(rand(n,n)*10)
+display('Check total rank of Matrix A :')
+RA=rank(A)
+Q=zeros(n,n);
+T=zeros(n,n);
+for i =1:n    
+    if i==1
+        W(:,i)=A(:,i);
+        norm_a(i)=sqrt(sum(W(:,i).^2));
+        Q(:,i)=W(:,i)./norm_a(i);
+    end    
+    if i>1       
+        for k=1:i-1
+            T(:,i)=T(:,i)+(A(:,i)'*Q(:,k))*Q(:,k);          
+        end
+        W(:,i)=A(:,i)-T(:,i);
+        norm_a(i)=sqrt(sum(W(:,i).^2));
+            if norm_a(i)<=1e-3
+                W(:,i)=null(A');
+                norm_a(i)=sqrt(sum(W(:,i).^2));
+            end
+        Q(:,i)=W(:,i)./norm_a(i); 
+     end    
+end
+        Q=Q
+        R=Q'*A
