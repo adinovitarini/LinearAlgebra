@@ -1,0 +1,43 @@
+%Source Code LU_Decomposition
+
+clear all;
+clc
+disp('LU Decomposition Program for nxn Matrix');
+disp('          by : Adi Novitarini          ');
+disp('=======================================');
+disp('          General Form : Y=AX          ');
+n=input('Input total ordo for matrix A:      ');
+%Built matrix A
+A=ceil(rand(n)*10)
+%Check rank 
+if rank(A)==n
+%Built Upper Matrix 
+s=0;
+for j=1:n-1
+    for i=s+1:n-1
+        E=A(i+1,j)/A(j,j);
+        A(i+1,:)=A(i+1,:)-(E*A(j,:));
+        e(i+1,j)=E;
+    end
+    s=s+1;
+end
+U=A;
+%Build Lower Matrix
+L=e;
+L(:,n)=zeros(n,1); 
+for i=1:n
+    L(i,i)=1;
+end
+%Validate
+LU=L*U
+%Display Pivot and determinant 
+Pivot=diag(U)
+det_A=1;
+for i=1:size(Pivot,1)
+  det_A=det_A*Pivot(i);
+end
+disp('So, the determinant from Matrix A is ')
+det_A
+else
+    disp('Matrix A isnt full rank, run again')
+end 

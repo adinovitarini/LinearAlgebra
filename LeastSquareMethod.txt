@@ -1,0 +1,29 @@
+%Source code for LS Method  
+clear all
+clc
+%Set target data 
+b=[0;1;1.5;2.5;3;3;3]
+[m,n]=size(b);
+%Build matriks A
+for i=1:m
+        c(i)=i;
+        d(i)=1;
+end
+c=c'
+d=d'
+A=[c d]
+%Approximate Solution 
+x_hat=inv(A'*A)*A'*b;
+c_hat=x_hat(1)
+d_hat=x_hat(2)
+%inisialize matrix A 
+%Approximate Solution c(i)+d=b(i)
+for i=1:m       
+        b_hat(i)=(c_hat*i)+d_hat;
+end
+b_hat=b_hat'
+%plot data
+for i=1:m
+    t(i)=i;
+end
+plot(t,b,t,b_hat)

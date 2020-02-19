@@ -1,0 +1,35 @@
+%Source Code Orthogonality 
+clear all
+clc
+m=input('Total row : ');
+n=input('Total column : ');
+A=ceil(rand(m,n)*10)
+%Null Space 
+N=null(A);
+[o,q]=size(N);
+limit=numel(N); %Number element of array N 
+temp_var = true;   %Temporary Var
+for i=1:limit
+    if N(i)==0
+        temp_var=true;
+    else
+        temp_var=false;
+    end
+end
+if temp_var==true
+    for i=1:o
+    N(i)=0;
+    N=N';
+    end
+end
+%Row Space
+for i=1:m
+R=A(i,:)
+S=R*N
+S=round(S);
+end
+if S==0
+    disp('Matriks A bersifat orthogonal');
+else
+    disp('Matriks A tidak orthogonal');
+end
