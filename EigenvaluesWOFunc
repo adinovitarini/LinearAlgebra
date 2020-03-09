@@ -1,0 +1,19 @@
+clear all 
+clc 
+%eigenvalue 
+n=input('Ordo matrix : ');
+A=ceil(rand(n,n)*10)
+H=eye(n,n);
+p=zeros(n,n);
+%compute |lambdaI-A|=lambda^n+a1*lambda^n-1
+for i=1:n
+    a(i)=-trace(A*H)/i;
+    if i<n
+    H=A*H+a(i)*eye(n,n);
+    if i==n
+        H=eye(n,n);
+    end
+    end
+end
+a
+eigenValues=roots([1 a])
